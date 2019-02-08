@@ -42,7 +42,7 @@ class ThreeScene extends Component {
                 this.logo.material = material;
                 this.scene.add(gltf.scene);
             },
-            (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded'),
+            () => null,
             (error) => console.error(error.message),
         );
 
@@ -86,7 +86,7 @@ class ThreeScene extends Component {
 
     animate = () => {
         if (this.loaded) {
-            this.logo.rotation.z += 0.01;
+            this.logo.rotation.z += 0.015;
         }
 
         this.renderScene();

@@ -17,15 +17,82 @@ header {
 
   min-height: 65vh;
 
+  margin-bottom: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 header h1 {
-  color: rgb(235,245,255);
   text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+
+.bigMatch {
+  margin-bottom: 1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bigMatch > div {
+  display: inline-block;
+  width: 20vw;
+  max-width: 12.5rem;
+}
+
+.bigMatch > div > div {
+  position: relative;
+}
+
+.bigMatch > div > div p {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.bigMatch > div:nth-child(2) {
+  margin: 0 1rem 0 1rem;
+  width: auto;
+  font-weight: 100;
+  text-align: center;
+}
+
+.bigMatch img {
+  width: 100%;
+}
+
+.matchDetails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+
+.matchDetails > div {
+  width: 65vw;
+}
+
+.matchDetails > div div {
+  text-align: right;
+  display: inline-block;
+  width: 50%;
+}
+.matchDetails > div div p {
+  margin: 0 1rem 0 0;
+  font-weight: 500;
+}
+
+.matchDetails > div div:last-child {
+  text-align: left;
+}
+.matchDetails > div div:last-child p {
+  margin: 0 0 0 1rem;
+}
+
+footer {
+  height: 5vh;
 }
