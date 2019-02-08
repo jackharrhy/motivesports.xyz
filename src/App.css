@@ -1,19 +1,31 @@
-.App {
+.rootDiv {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.threeScene {
+  width: 100vh;
+  height: 50vh;
 }
 
-.App-header {
-  background-color: #191b1d;
-  min-height: 90vh;
+.threeScene canvas {
+  margin-top: 1rem;
+}
+
+header {
+  background: rgb(79,27,88);
+  background: linear-gradient(40deg, rgb(54, 11, 61) 0%, rgb(10, 23, 65) 100%);
+
+  min-height: 65vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+header h1 {
+  color: rgb(235,245,255);
+  text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
 }
