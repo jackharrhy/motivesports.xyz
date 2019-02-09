@@ -1,0 +1,122 @@
+.rootDiv {
+  text-align: center;
+}
+
+.threeScene {
+  width: 100vh;
+  height: 50vh;
+
+  canvas {
+    margin-top: 1rem;
+  }
+}
+
+
+header {
+  background: rgb(79,27,88);
+  background: linear-gradient(40deg, rgb(54, 11, 61) 0%, rgb(10, 23, 65) 100%);
+
+  min-height: 65vh;
+
+  margin-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-size: calc(10px + 2vmin);
+
+  h1 {
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+  }
+}
+
+.bigMatch {
+  margin-bottom: 1vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    display: inline-block;
+    width: 20vw;
+    max-width: 12.5rem;
+
+    > div {
+      position: relative;
+
+      p {
+        position: absolute;
+        top: 0;
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
+
+  > div:nth-child(2) {
+    margin: 0 1rem 0 1rem;
+    width: auto;
+    font-weight: 100;
+    text-align: center;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.matchDetails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 5vh;
+}
+
+.matchDetails-names {
+  width: 65vw;
+
+  div {
+    text-align: right;
+    display: inline-block;
+    width: 50%;
+
+    p {
+      margin: 0 1rem 0 0;
+      font-weight: 500;
+    }
+  }
+
+  div:last-child {
+    text-align: left;
+    p {
+      margin: 0 0 0 1rem;
+    }
+  }
+}
+
+.matchDetails-timeStamp {
+  flex-basis: 100%;
+
+  > div {
+    padding: 0.5rem 0 0.5rem 0;
+    margin: 1rem auto 0 auto;
+    width: 10rem;
+    background-color: rgba(0,0,0,0.25);
+
+    h5 {
+      margin: 0;
+      font-size: 0.7rem;
+    }
+
+    h4 {
+      margin: 0.15rem 0 0 0;
+      font-size: 1.6rem;
+    }
+  }
+}
+
+footer {
+  height: 5vh;
+}

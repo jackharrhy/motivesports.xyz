@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {isEmpty} from 'lodash';
 
 class BigMatch extends Component {
   render() {
@@ -6,6 +7,11 @@ class BigMatch extends Component {
       leftTeam,
       rightTeam,
     } = this.props;
+
+    if (isEmpty(leftTeam) || isEmpty(rightTeam)) {
+      // TODO default to unknown icon/name
+      return null;
+    }
 
     return (
       <div className="bigMatch">

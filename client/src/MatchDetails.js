@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {isEmpty} from 'lodash';
 
 import moment from 'moment';
 
@@ -9,6 +10,11 @@ class MatchDetails extends Component {
       rightTeam,
       when,
     } = this.props;
+
+    if (isEmpty(leftTeam) || isEmpty(rightTeam)) {
+      // TODO default to unknown icon/name
+      return null;
+    }
 
     return (
       <div className="matchDetails">
@@ -21,12 +27,16 @@ class MatchDetails extends Component {
               <p>{leftTeam.name}</p>
             </div>
           </div>
-          <div className="matchDetails-timeStamp">
-            <div>
-              <h5>{moment(when).format('dddd, MMMM Do')}</h5>
-              <h4>{moment(when).format('LT')}</h4>
-            </div>
-          </div>
+          {
+            isEmpty(when) ? null : (
+              <div className="matchDetails-timeStamp">
+                <div>
+                  <h5>{moment(when).format('dddd, MMMM Do')}</h5>
+                  <h4>{moment(when).format('LT')}</h4>
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
     );
