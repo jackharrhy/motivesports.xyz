@@ -69,28 +69,48 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   margin-bottom: 5vh;
 }
 
-.matchDetails > div {
+.matchDetails-names {
   width: 65vw;
 }
 
-.matchDetails > div div {
+.matchDetails-names div {
   text-align: right;
   display: inline-block;
   width: 50%;
 }
-.matchDetails > div div p {
+.matchDetails-names div p {
   margin: 0 1rem 0 0;
   font-weight: 500;
 }
 
-.matchDetails > div div:last-child {
+.matchDetails-names div:last-child {
   text-align: left;
 }
-.matchDetails > div div:last-child p {
+.matchDetails-names div:last-child p {
   margin: 0 0 0 1rem;
+}
+
+.matchDetails-timeStamp {
+  flex-basis: 100%;
+}
+
+.matchDetails-timeStamp > div {
+  padding: 0.5rem 0 0.5rem 0;
+  margin: 0 auto;
+  width: 14rem;
+  background-color: rgba(0,0,0,0.25);
+}
+
+.matchDetails-timeStamp > div h5 {
+  margin: 0;
+}
+
+.matchDetails-timeStamp > div h4 {
+  margin: 0.15rem 0 0 0;
 }
 
 footer {
