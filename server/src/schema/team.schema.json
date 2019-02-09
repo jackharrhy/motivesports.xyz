@@ -1,0 +1,23 @@
+{
+  "$id": "https://motivesports.xyz/schema/team.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Team",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the team"
+    },
+    "img": {
+      "type": "object",
+      "properties": {
+        "square": {
+          "type": "string",
+          "description": "A square image representing the team"
+        }
+      },
+      "required": ["square"]
+    }
+  },
+  "required": ["name", "img"]
+}

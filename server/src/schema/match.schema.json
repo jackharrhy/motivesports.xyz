@@ -1,0 +1,21 @@
+{
+  "$id": "https://motivesports.xyz/schema/match.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Match",
+  "type": "object",
+  "properties": {
+    "team1": {
+      "type": "string",
+      "description": "The first team"
+    },
+    "team2": {
+      "type": "string",
+      "description": "The second team"
+    },
+    "when": {
+      "description": "When the match occured (UTC)",
+      "type": "string"
+    }
+  },
+  "required": ["team1", "team2", "when"]
+}
