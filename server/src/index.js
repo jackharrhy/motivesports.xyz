@@ -18,7 +18,7 @@ const db = low(adapter);
 
 db.defaults({
   teams: {},
-  matches: [],
+  matches: {},
 }).write();
 
 app.use(cors({
