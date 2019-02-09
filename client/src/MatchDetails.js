@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {isEmpty} from 'lodash';
-
 import moment from 'moment';
 
 class MatchDetails extends Component {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 
 import './App.scss';
 import BigMatch from './BigMatch';
@@ -41,21 +42,32 @@ class App extends Component {
   }
 
   renderBody = () => {
-    return Object.entries(this.state.matches).map(([uuid, match]) => (
-      <div
-        key={uuid}
-      >
-        <BigMatch
-          leftTeam={this.state.teams[match.team1]}
-          rightTeam={this.state.teams[match.team2]}
-        />
-        <MatchDetails
-          when={match.when}
-          leftTeam={this.state.teams[match.team1]}
-          rightTeam={this.state.teams[match.team2]}
-        />
-      </div>
-    ))
+    let prevDay;
+    return Object.entries(this.state.matches).map(([uuid, match]) => {
+      if (prevDay !== undefined) {
+        // do something
+      }
+      return (
+        <div
+          key={uuid}
+        >
+          <div
+            className="daySplitter"
+          >
+            <h2>{moment(match.when).format('MMMM Do')}</h2>
+          </div>
+          <BigMatch
+            leftTeam={this.state.teams[match.team1]}
+            rightTeam={this.state.teams[match.team2]}
+          />
+          <MatchDetails
+            when={match.when}
+            leftTeam={this.state.teams[match.team1]}
+            rightTeam={this.state.teams[match.team2]}
+          />
+        </div>
+      );
+    });
   };
 
   render() {
