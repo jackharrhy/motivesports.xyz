@@ -6,14 +6,16 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "Name of the team"
+      "description": "Name of the team",
+      "minLength": 1
     },
     "img": {
       "type": "object",
       "properties": {
         "square": {
           "type": "string",
-          "description": "A square image representing the team"
+          "description": "A square image representing the team",
+          "minLength": 4
         }
       },
       "required": ["square"]

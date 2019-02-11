@@ -1,6 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import {MuiPickersUtilsProvider} from 'material-ui-pickers';
+import MomentUtils from '@date-io/moment';
+
+import './styles/index.scss';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Root = () => (
+  <MuiPickersUtilsProvider utils={MomentUtils}>
+    <App />
+  </MuiPickersUtilsProvider>
+);
+
+ReactDOM.render(<Root />, document.getElementById('root'));

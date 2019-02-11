@@ -1,11 +1,9 @@
 const express = require('@feathersjs/express');
-const uuid4 = require('uuid/v4')
+const shortid = require('shortid');
 const path = require('path');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
-const {
-  BadRequest,
-} = require('@feathersjs/errors');
+const {BadRequest, Forbidden} = require('@feathersjs/errors');
 
 const validatorFacotry = require('./validator');
 
@@ -29,7 +27,16 @@ module.exports = async (app) => {
     async create(data, params) {
       const {valid, validator} = validate('match', data);
       if (!valid) throw new BadRequest(validator.errors);
-      const id = uuid4();
+
+      if (db.get(`teams.${data.team1}`).value() === undefined) {
+        throw new BadRequest(`Team '${data.team1}' doesn't exist in the database`)
+      }
+      if (db.get(`teams.${data.team2}`).value() === undefined) {
+        throw new BadRequest(`Team '${data.team2}' doesn't exist in the database`)
+      }
+
+      const id = shortid.generate();
+      await db.set(`matches.${id}`, data).write();
       return id;
     },
   };
@@ -42,11 +49,40 @@ module.exports = async (app) => {
     async create(data, params) {
       const {valid, validator} = validate('team', data);
       if (!valid) throw new BadRequest(validator.errors);
-      const id = uuid4();
-      return id;
+
+      if (db.get(`teams.${data.name}`).value() !== undefined) {
+        throw new BadRequest(`Team '${data.name}' already exists in the database`)
+      }
+
+      await db.set(`teams.${data.name}`, data).write();
+      return data.name;
     },
   };
   app.use('/api/teams', teamsService);
+
+  const secretService = {
+    async find(params) {
+      return 'stop poking around my api you dweeb';
+    },
+    async create(data, params) {
+      const {valid, validator} = validate('secret', data);
+      if (!valid) throw new BadRequest(validator.errors);
+
+      const actualSecret = process.env.SECRET_KEY;
+      if (actualSecret !== data.secret) throw new Forbidden('go away');
+      return process.env.SECRET_TOKEN;
+    },
+  };
+  app.use('/api/secret', secretService);
+
+  app.hooks({
+    before: {
+      create(ctx) {
+        // TODO AUTH FUN STUFF
+        // https://docs.feathersjs.com/guides/auth/recipe.mixed-auth.html#set-up-a-mixed-auth-endpoint
+      },
+    },
+  });
 
   app.use('/', express.static(path.resolve(clientDir)));
   app.use('/schema', express.static(path.resolve(__dirname, 'schema')));

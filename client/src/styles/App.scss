@@ -1,7 +1,3 @@
-.rootDiv {
-  text-align: center;
-}
-
 .threeScene {
   width: 100vh;
   height: 50vh;
@@ -17,7 +13,6 @@ header {
 
   min-height: 65vh;
 
-  margin-bottom: -2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +22,26 @@ header {
 
   h1 {
     text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+  }
+}
+
+.editor {
+  padding: 3rem 3vw 4rem 3vw;
+  background-color: rgb(230, 230, 230);
+  color: black;
+
+  > div {
+    margin: 0 auto;
+    width: 20rem;
+
+    > div {
+      margin: 1rem 0 0 0;
+      padding: 0.75rem 1.5rem;
+    }
+
+    > div:first-child {
+      margin: 0;
+    }
   }
 }
 
@@ -71,6 +86,7 @@ header {
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 5vh;
+  text-align: center;
 }
 
 .matchDetails-names {
@@ -129,4 +145,15 @@ header {
 
 footer {
   height: 5vh;
+
+  .secret {
+    button {
+      margin: 0 0 0 1rem;
+      opacity: 0;
+
+      &:hover {
+        opacity: 0.15;
+      }
+    }
+  }
 }

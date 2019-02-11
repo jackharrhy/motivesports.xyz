@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
-import moment from 'moment';
+import {sortBy} from 'lodash';
+import {Button} from '@material-ui/core';
 
-import './App.scss';
-import BigMatch from './BigMatch';
-import MatchDetails from './MatchDetails';
-import ThreeScene from './ThreeScene';
+import './styles/App.scss';
+import {
+  Secret,
+  BigMatch,
+  MatchDetails,
+  ThreeScene,
+  EditPage,
+} from './components';
+import api from './utils/api';
 
 class App extends Component {
   constructor(props) {
@@ -13,48 +19,60 @@ class App extends Component {
     this.state = {
       teams: {},
       matches: [],
+      showSecret: false,
+      canEdit: false,
+      secretToken: null,
     };
   }
 
-  async apiGet(endpoint) {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`);
-      return await response.json();
-    } catch (err) {
-      console.log(err);
-      return {};
-    }
-  }
-
   async getTeams() {
-    const teams = await this.apiGet('teams');
+    const teams = await api.get('teams');
     this.setState({teams});
   }
 
   async getMatches() {
-    const matches = await this.apiGet('matches');
-    this.setState({matches});
+    const matches = await api.get('matches');
+    this.setState({matches: sortBy(matches, 'when')});
   }
 
   componentDidMount() {
+    this.dataRefresh();
+  }
+
+  dataRefresh = () => {
     this.getMatches();
     this.getTeams();
-  }
+  };
+
+  openSecret = () => {
+    this.setState({showSecret: true});
+  };
+
+  handleClose = () => {
+    this.setState({showSecret: false});
+  };
+
+  handleSecret = async (secretValue) => {
+    const secretToken =  await api.post('secret', {secret: secretValue});
+    if (secretToken.length > 0) {
+      this.setState({
+        showSecret: false,
+        secretToken,
+        canEdit: true,
+      });
+    }
+  };
 
   renderBody = () => {
     let prevDay;
-    return Object.entries(this.state.matches).map(([uuid, match]) => {
+    return Object.entries(this.state.matches).map(([id, match]) => {
       if (prevDay !== undefined) {
         // do something
       }
       return (
-        <div
-          key={uuid}
-        >
-          <div
-            className="daySplitter"
-          >
-            <h2>{moment(match.when).format('MMMM Do')}</h2>
+        <div key={id}>
+          <div className="daySplitter">
+            <h2>{/*moment(match.when).format('MMMM Do, YYYY')*/}</h2>
           </div>
           <BigMatch
             leftTeam={this.state.teams[match.team1]}
@@ -71,15 +89,33 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className="rootDiv">
         <header>
           <ThreeScene />
           <h1>MOTIV</h1>
         </header>
+        {
+          this.state.canEdit ? (
+            <EditPage
+              dataRefresh={this.dataRefresh}
+              secretToken={this.state.secretToken}
+            />
+          ) : null
+        }
         {this.renderBody()}
-        <footer />
+        <footer>
+          <div className="secret">
+            <Secret
+              open={this.state.showSecret}
+              handleClose={this.handleClose}
+              handleSecret={this.handleSecret}
+            />
+            <Button onClick={this.openSecret}>
+              gabs only
+            </Button>
+          </div>
+        </footer>
       </div>
     );
   }

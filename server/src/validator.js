@@ -4,6 +4,7 @@ const Ajv = require('ajv');
 const names = [
   'match',
   'team',
+  'secret',
 ];
 
 module.exports = async () => {

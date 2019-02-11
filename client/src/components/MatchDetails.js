@@ -20,10 +20,10 @@ class MatchDetails extends Component {
         <div>
           <div className="matchDetails-names">
             <div>
-              <p>{rightTeam.name}</p>
+              <p>{leftTeam.name}</p>
             </div>
             <div>
-              <p>{leftTeam.name}</p>
+              <p>{rightTeam.name}</p>
             </div>
           </div>
           {
