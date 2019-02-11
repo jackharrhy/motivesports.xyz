@@ -20,6 +20,15 @@ db.defaults({
 module.exports = async (app) => {
   const validate = await validatorFacotry();
 
+  const ensureToken = (req, res, next) => {
+    if (req.method === 'POST') {
+      if (req.header('Authorization') !== `Basic ${process.env.SECRET_TOKEN}`) {
+        throw new Forbidden('ur not gabs');
+      }
+    }
+    next();
+  };
+
   const matchesService = {
     async find(params) {
       return db.get('matches').value();
@@ -40,7 +49,7 @@ module.exports = async (app) => {
       return id;
     },
   };
-  app.use('/api/matches', matchesService);
+  app.use('/api/matches', ensureToken, matchesService);
 
   const teamsService = {
     async find(params) {
@@ -58,7 +67,7 @@ module.exports = async (app) => {
       return data.name;
     },
   };
-  app.use('/api/teams', teamsService);
+  app.use('/api/teams', ensureToken, teamsService);
 
   const secretService = {
     async find(params) {
@@ -74,15 +83,6 @@ module.exports = async (app) => {
     },
   };
   app.use('/api/secret', secretService);
-
-  app.hooks({
-    before: {
-      create(ctx) {
-        // TODO AUTH FUN STUFF
-        // https://docs.feathersjs.com/guides/auth/recipe.mixed-auth.html#set-up-a-mixed-auth-endpoint
-      },
-    },
-  });
 
   app.use('/', express.static(path.resolve(clientDir)));
   app.use('/schema', express.static(path.resolve(__dirname, 'schema')));
