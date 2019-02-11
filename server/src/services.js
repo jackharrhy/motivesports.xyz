@@ -38,10 +38,10 @@ module.exports = async (app) => {
       if (!valid) throw new BadRequest(validator.errors);
 
       if (db.get(`teams.${data.team1}`).value() === undefined) {
-        throw new BadRequest(`Team '${data.team1}' doesn't exist in the database`)
+        throw new BadRequest(`Team '${data.team1}' doesn't exist in the database`);
       }
       if (db.get(`teams.${data.team2}`).value() === undefined) {
-        throw new BadRequest(`Team '${data.team2}' doesn't exist in the database`)
+        throw new BadRequest(`Team '${data.team2}' doesn't exist in the database`);
       }
 
       const id = shortid.generate();
@@ -60,7 +60,7 @@ module.exports = async (app) => {
       if (!valid) throw new BadRequest(validator.errors);
 
       if (db.get(`teams.${data.name}`).value() !== undefined) {
-        throw new BadRequest(`Team '${data.name}' already exists in the database`)
+        throw new BadRequest(`Team '${data.name}' already exists in the database`);
       }
 
       await db.set(`teams.${data.name}`, data).write();
