@@ -1,0 +1,18 @@
+{
+  "name": "motivesports.xyz",
+  "version": "0.0.1",
+  "scripts": {
+    "start:client": "cd ./client && npm run start",
+    "start:server": "cd ./server && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackharrhy/motivesports.xyz.git"
+  },
+  "author": "Jack Arthur Harrhy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackharrhy/motivesports.xyz/issues"
+  },
+  "homepage": "https://github.com/jackharrhy/motivesports.xyz#readme"
+}

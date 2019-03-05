@@ -1,13 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {isEmpty} from 'lodash';
 
-class BigMatch extends Component {
-  render() {
-    const {
-      leftTeam,
-      rightTeam,
-    } = this.props;
-
+export default (props) => {
+    const {leftTeam, rightTeam} = props;
     if (isEmpty(leftTeam) || isEmpty(rightTeam)) {
       // TODO default to unknown icon/name
       return null;
@@ -26,7 +21,4 @@ class BigMatch extends Component {
         </div>
       </div>
     );
-  }
-}
-
-export default BigMatch;
+};

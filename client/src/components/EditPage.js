@@ -40,13 +40,12 @@ class EditPage extends Component {
       selectedTime: when,
     } = this.state;
 
-    const matchId = await api.post('matches', {
+    await api.post('matches', {
       team1,
       team2,
       when: when ? when.utc() : when,
     }, this.props.secretToken);
 
-    console.log('POST matches respose:', matchId);
     this.props.dataRefresh();
   };
 
@@ -56,14 +55,13 @@ class EditPage extends Component {
       squareImgURL,
     } = this.state;
 
-    const name = await api.post('teams', {
+    await api.post('teams', {
       name: teamName,
       img: {
         square: squareImgURL,
       },
     }, this.props.secretToken);
 
-    console.log('POST teams respose:', name);
     this.props.dataRefresh();
   };
 

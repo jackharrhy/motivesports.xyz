@@ -9,6 +9,7 @@ import {
   MatchDetails,
   ThreeScene,
   EditPage,
+  EditMatch,
 } from './components';
 import api from './utils/api';
 
@@ -32,6 +33,9 @@ class App extends Component {
 
   async getMatches() {
     const matches = await api.get('matches');
+    for (let matchId in matches) {
+      matches[matchId].id = matchId;
+    }
     this.setState({matches: sortBy(matches, 'when')});
   }
 
@@ -83,6 +87,15 @@ class App extends Component {
             leftTeam={this.state.teams[match.team1]}
             rightTeam={this.state.teams[match.team2]}
           />
+          {
+            this.state.canEdit ? (
+              <EditMatch
+                matchId={match.id}
+                dataRefresh={this.dataRefresh}
+                secretToken={this.state.secretToken}
+              />
+            ) : null
+          }
         </div>
       );
     });
@@ -104,18 +117,22 @@ class App extends Component {
           ) : null
         }
         {this.renderBody()}
-        <footer>
-          <div className="secret">
-            <Secret
-              open={this.state.showSecret}
-              handleClose={this.handleClose}
-              handleSecret={this.handleSecret}
-            />
-            <Button onClick={this.openSecret}>
-              gabs only
-            </Button>
-          </div>
-        </footer>
+        {
+          this.state.canEdit ? null : (
+            <footer>
+              <div className="secret">
+                <Secret
+                  open={this.state.showSecret}
+                  handleClose={this.handleClose}
+                  handleSecret={this.handleSecret}
+                />
+                <Button onClick={this.openSecret}>
+                  gabs only
+                </Button>
+              </div>
+            </footer>
+          )
+        }
       </div>
     );
   }
