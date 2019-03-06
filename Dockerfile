@@ -4,8 +4,8 @@ WORKDIR /usr/src/app
 
 # bring in package*.jsons
 RUN mkdir client && mkdir server
-COPY ./client/package*.json ./client
-COPY ./server/package*.json ./server
+COPY ./client/package*.json ./client/
+COPY ./server/package*.json ./server/
 COPY ./package*.json .
 
 # install npm packages for both folders
