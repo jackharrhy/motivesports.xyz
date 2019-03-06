@@ -2,6 +2,8 @@
   "name": "motivesports.xyz",
   "version": "0.0.1",
   "scripts": {
+    "install:everything": "cd ./client && npm install && cd ../server && npm install",
+    "build:client": "cd ./client && npm run build",
     "start:client": "cd ./client && npm run start",
     "start:server": "cd ./server && npm run start"
   },
