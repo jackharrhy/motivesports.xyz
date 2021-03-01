@@ -13,7 +13,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3",
-    "three": "^0.101.1",
+    "three": "^0.125.0",
     "three-gltf-loader": "^1.101.0"
   },
   "scripts": {
